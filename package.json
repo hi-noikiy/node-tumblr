@@ -1,0 +1,21 @@
+{
+  "name": "tumblr.js",
+  "version": "1.0.0",
+  "description": "tumblr api client.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "tumblr"
+  ],
+  "author": "zhouyuexie",
+  "license": "MIT",
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "got": "^8.3.0",
+    "oauth-1.0a": "^2.2.4",
+    "qs": "^6.5.1",
+    "tunnel": "^0.0.5"
+  }
+}
