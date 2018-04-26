@@ -1,4 +1,5 @@
 const Tumblr = require('./index');
+const qs = require('qs');
 
 const client = {
 	consumer_key: 'wsGzCwE7eyxoMa9hQAWcy010feXRRw5r872nyoGhmBevIOrGgX',
@@ -8,14 +9,30 @@ const client = {
 }
 
 const api = new Tumblr(client);
-
 api.setProxy({
 	host: 'localhost',
 	port: '1087'
-})
-api.userInfo().then(res => {
-	console.log(res)
-}).catch(err => {
-	console.log(err)
-	console.log(api)
-})
+});
+
+const testArray = ['userInfo', 'dashBoard', 'userLikes'];
+
+const testOne = async (name, isShowData = false) => {
+	try {
+		const res = await api[name]();
+		console.log(`${name} is success!`);
+		if (isShowData) {
+			console.log(res);
+		}
+	} catch(e) {
+		console.log(`${name} is error.`);
+		console.log(e);
+	}
+}
+
+function testAll() {
+	for(let i = 0;i < testArray.length; i++) {
+		testOne(testArray[i]);
+	}
+}
+
+testAll();

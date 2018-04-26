@@ -3,13 +3,7 @@ const Oauth = require('oauth-1.0a');
 const crypto = require('crypto');
 const qs = require('qs');
 const tunnel = require('tunnel');
-
-const API_BASE_URL = 'http://api.tumblr.com/v2';
-const GET_URL = {
-	userInfo: {
-		url: API_BASE_URL + '/user/info'
-	}
-}
+const { GET_URL } = require('./config/url');
 
 class Tumblr {
 	constructor({ consumer_key, consumer_secret, token, token_secret }) {
@@ -51,15 +45,30 @@ class Tumblr {
 
 	/**
 	 * Assemble the data execution request
-	 * @param {string} url 
-	 * @param {object} options 
+	 * @param {string} name 
+	 * @param {object} querys
 	 */
-	request(url, options) {
+	getRequest(name, querys = {}) {
+		const querysValue = qs.stringify(querys);
+		let url = GET_URL[name].url;
+
+		if (querysValue !== '') {
+			url = `${url}?${querysValue}`;
+		}
+
+		let headerToken = this.oauth.toHeader(this.oauth.authorize({url, method: 'GET'}, this.token));
+		let	options = {
+			headers: headerToken,
+			json: true,
+			timeout: 10000
+		};
+
 		if (this.proxy) {
 			options = Object.assign({}, options, {
 				agent: this.proxy
-			})
+			});
 		}
+
 		return got(url, options).then(res => {
 			if (res.body && res.body.response) {
 				return res.body.response;
@@ -73,14 +82,35 @@ class Tumblr {
 	 * get user info
 	 */
 	userInfo() {
-		const url = GET_URL.userInfo.url,
-			headerToken = this.oauth.toHeader(this.oauth.authorize({url, method: 'GET'}, this.token));
+		return this.getRequest('userInfo');
+	}
 
-		return this.request(url, {
-			headers: headerToken,
-			json: true,
-			timeout: 10000
-		});
+	/**
+	 * get dashboard
+	 */
+	dashBoard(config = {}) {
+		const querys = Object.assign({}, GET_URL.dashBoard.defaultConfig, config);
+		return this.getRequest('dashBoard', querys);
+	}
+
+	/**
+	 * get user like
+	 */
+	userLikes(config = {}) {
+		const querys = Object.assign({}, GET_URL.userLikes.defaultConfig, config);
+		
+		if (
+			(querys.limit && querys.before) ||
+			(querys.limit && querys.after) ||
+			(querys.before && querys.after)
+		) {
+			console.warn(`1.You can only provide either before, after, or offset. If you provide more than one of these options together you will get an error.
+			2.You can still use limit with any of those three options to limit your result set.
+			3.When using the offset parameter the maximum limit on the offset is 1000. If you would like to get more results than that use either before or after.`);
+			return;
+		}
+
+		return this.getRequest('userLikes', querys);
 	}
 }
 

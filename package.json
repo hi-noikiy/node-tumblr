@@ -7,10 +7,10 @@
     "test": "node ./test.js"
   },
   "keywords": [
-		"tumblr",
-		"token",
-		"api",
-		"auth"
+    "tumblr",
+    "token",
+    "api",
+    "auth"
   ],
   "author": "zhouyuexie",
   "license": "MIT",
