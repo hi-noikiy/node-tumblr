@@ -14,7 +14,7 @@ api.setProxy({
 	port: '1087'
 })
 api.userInfo().then(res => {
-	console.log(res.body)
+	console.log(res)
 }).catch(err => {
 	console.log(err)
 	console.log(api)

@@ -60,7 +60,13 @@ class Tumblr {
 				agent: this.proxy
 			})
 		}
-		return got(url, options);
+		return got(url, options).then(res => {
+			if (res.body && res.body.response) {
+				return res.body.response;
+			}
+
+			return res.meta;
+		})
 	}
 
 	/**
