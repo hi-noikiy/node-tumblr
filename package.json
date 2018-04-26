@@ -4,10 +4,13 @@
   "description": "tumblr api client.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node ./test.js"
   },
   "keywords": [
-    "tumblr"
+		"tumblr",
+		"token",
+		"api",
+		"auth"
   ],
   "author": "zhouyuexie",
   "license": "MIT",
