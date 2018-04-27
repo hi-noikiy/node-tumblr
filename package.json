@@ -2,9 +2,11 @@
   "name": "tumblr.js",
   "version": "1.0.0",
   "description": "tumblr api client.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "node ./test/test.js"
+    "test": "node ./test/test.js",
+    "build": "flow-remove-types src/ -d dist/",
+    "prepublish": "npm run build && npm run test"
   },
   "keywords": [
     "tumblr",
@@ -20,5 +22,9 @@
     "oauth-1.0a": "^2.2.4",
     "qs": "^6.5.1",
     "tunnel": "^0.0.5"
+  },
+  "devDependencies": {
+    "flow-bin": "^0.71.0",
+    "flow-remove-types": "^1.2.3"
   }
 }

@@ -1,4 +1,4 @@
-const Tumblr = require('../index');
+const Tumblr = require('../dist/index');
 const config = require('./testconfig');
 const qs = require('qs');
 
@@ -8,7 +8,7 @@ api.setProxy({
 	port: '1087'
 });
 
-const testArray = ['userInfo', 'dashBoard', 'userLikes'];
+const testGetArray = ['userInfo', 'dashBoard', 'userLikes', 'userFollowing'];
 
 const testOne = async (name, isShowData = false) => {
 	try {
@@ -23,10 +23,10 @@ const testOne = async (name, isShowData = false) => {
 	}
 }
 
-function testAll() {
-	for(let i = 0;i < testArray.length; i++) {
-		testOne(testArray[i]);
+function testGetAll() {
+	for(let i = 0;i < testGetArray.length; i++) {
+		testOne(testGetArray[i]);
 	}
 }
 
-testAll();
+testGetAll();

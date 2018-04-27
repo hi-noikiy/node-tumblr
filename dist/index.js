@@ -1,19 +1,48 @@
+//      
 const got = require('got');
 const Oauth = require('oauth-1.0a');
 const crypto = require('crypto');
 const qs = require('qs');
 const tunnel = require('tunnel');
-const { GET_URL } = require('./config/url');
+const { GET_URL } = require('../config/url');
+
+                    
+                      
+                         
+               
+                     
+ 
+
+                    
+             
+               
+ 
+
+                   
+               
+                
+                                                                         
+                   
+                       
+                      
+                 
+               
+ 
 
 class Tumblr {
-	constructor({ consumer_key, consumer_secret, token, token_secret }) {
+	                      
+	                   
+	              
+	             
+
+	constructor(token             ) {
 		this.consumer = {
-			key: consumer_key,
-			secret: consumer_secret
+			key: token.consumer_key,
+			secret: token.consumer_secret
 		}
 		this.token = {
-			key: token,
-			secret: token_secret
+			key: token.token,
+			secret: token.token_secret
 		}
 
 		this.initOauth();
@@ -34,11 +63,14 @@ class Tumblr {
 	 * setting proxy
 	 * @param {host port} proxy 
 	 */
-	setProxy({ host, port }) {
+	setProxy(proxy   
+               
+              
+  ) {
 		this.proxy = tunnel.httpOverHttp({
 			proxy: {
-				host,
-				port
+				host: proxy.host,
+				port: proxy.port
 			}
 		});
 	}
@@ -48,12 +80,15 @@ class Tumblr {
 	 * @param {string} name 
 	 * @param {object} querys
 	 */
-	getRequest(name, querys = {}) {
+	getRequest(name        , querys             ) {
 		const querysValue = qs.stringify(querys);
 		let url = GET_URL[name].url;
 
 		if (querysValue !== '') {
 			url = `${url}?${querysValue}`;
+		}
+		if (querys && (querys.limit < 1 || querys.limit > 20)) {
+			console.warn('The number of results to return: 1–20, inclusive');
 		}
 
 		let headerToken = this.oauth.toHeader(this.oauth.authorize({url, method: 'GET'}, this.token));
@@ -79,24 +114,25 @@ class Tumblr {
 	}
 
 	/**
-	 * get user info
+	 * Use this method to retrieve the user's account information that matches the OAuth credentials submitted with the request.
 	 */
 	userInfo() {
 		return this.getRequest('userInfo');
 	}
 
 	/**
-	 * get dashboard
+	 * Use this method to retrieve the dashboard that matches the OAuth credentials submitted with the request.
+	 * @param {object} GET_URL.dashBoard.defaultConfig
 	 */
-	dashBoard(config = {}) {
-		const querys = Object.assign({}, GET_URL.dashBoard.defaultConfig, config);
-		return this.getRequest('dashBoard', querys);
+	dashBoard(config            ) { 
+		const querys = Object.assign({}, GET_URL.dashBoard.defaultConfig, config); return this.getRequest('dashBoard', querys);
 	}
 
 	/**
-	 * get user like
+	 * Use this method to retrieve the liked posts that match the OAuth credentials submitted with the request.
+	 * @param {object} GET_URL.userLikes.defaultConfig 
 	 */
-	userLikes(config = {}) {
+	userLikes(config            ) {
 		const querys = Object.assign({}, GET_URL.userLikes.defaultConfig, config);
 		
 		if (
@@ -111,6 +147,12 @@ class Tumblr {
 		}
 
 		return this.getRequest('userLikes', querys);
+	}
+
+	userFollowing(config            ) {
+		const querys = Object.assign({}, GET_URL.dashBoard.defaultConfig, config);
+
+		return this.getRequest('userFollowing', querys);
 	}
 }
 

@@ -1,11 +1,15 @@
 const API_BASE_URL = 'http://api.tumblr.com/v2';
 
+function wrapUrl(api) {
+	return API_BASE_URL + api;
+}
+
 const GET_URL = {
 	userInfo: {
-		url: API_BASE_URL + '/user/info'
+		url: wrapUrl('/user/info')
 	},
 	dashBoard: {
-    url: API_BASE_URL + '/user/dashboard',
+    url: wrapUrl('/user/dashboard'),
     defaultConfig: {
       limit: 20,
 			offset: 0,
@@ -16,14 +20,21 @@ const GET_URL = {
     }
   },
   userLikes: {
-    url: API_BASE_URL + '/user/likes',
+    url: wrapUrl('/user/likes'),
     defaultConfig: {
       limit: 20,
       offset: 0,
       // before: Date.now(),
       // after: Date.now()
     }
-  }
+	},
+	userFollowing: {
+		url: wrapUrl('/user/following'),
+		defaultConfig: {
+			limit: 20,
+			offset: 0
+		}
+	}
 }
 
 module.exports = {
