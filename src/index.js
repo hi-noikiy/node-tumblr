@@ -78,7 +78,9 @@ class Tumblr {
 	/**
 	 * Assemble the data execution request
 	 * @param {string} name 
-	 * @param {object} querys
+	 * @param {object} querys - limit,offset .... or null
+	 * 
+	 * @return {Promise} Promise return
 	 */
 	getRequest(name: string, querys?: TypeConfig) {
 		const querysValue = qs.stringify(querys);
@@ -123,6 +125,9 @@ class Tumblr {
 	/**
 	 * Use this method to retrieve the dashboard that matches the OAuth credentials submitted with the request.
 	 * @param {object} GET_URL.dashBoard.defaultConfig
+	 * 
+	 * @method dashBoard
+	 * @return {Promise} Promise return
 	 */
 	dashBoard(config: TypeConfig) { 
 		const querys = Object.assign({}, GET_URL.dashBoard.defaultConfig, config); return this.getRequest('dashBoard', querys);
@@ -131,6 +136,9 @@ class Tumblr {
 	/**
 	 * Use this method to retrieve the liked posts that match the OAuth credentials submitted with the request.
 	 * @param {object} GET_URL.userLikes.defaultConfig 
+	 * 
+	 * @method userLikes
+	 * @return {Promise} Promise return
 	 */
 	userLikes(config: TypeConfig) {
 		const querys = Object.assign({}, GET_URL.userLikes.defaultConfig, config);
@@ -152,6 +160,9 @@ class Tumblr {
 	/**
 	 * Use this method to retrieve the blogs followed by the user whose OAuth credentials are submitted with the request.
 	 * @param {object} config 
+	 * 
+	 * @method userFollowing
+	 * @return {Promise} Promise return
 	 */
 	userFollowing(config: TypeConfig) {
 		const querys = Object.assign({}, GET_URL.dashBoard.defaultConfig, config);
