@@ -24,8 +24,8 @@ const GET_URL = {
     defaultConfig: {
       limit: 20,
       offset: 0,
-      // before: Date.now(),
-      // after: Date.now()
+      // before: null,
+      // after: null
     }
 	},
 	userFollowing: {
@@ -33,6 +33,66 @@ const GET_URL = {
 		defaultConfig: {
 			limit: 20,
 			offset: 0
+		}
+	},
+	blogInfo: {
+		url: ({blogIdentifier}) => wrapUrl(`/blog/${blogIdentifier}/info`)
+	},
+	blogAvatar: {
+		url: ({blogIdentifier, size = ''}) => wrapUrl(`/blog/${blogIdentifier}/avatar/${size}`),
+		isRemoveToken: true
+	},
+	blogLikes: {
+		url: ({blogIdentifier}) => wrapUrl(`/blog/${blogIdentifier}/likes`),
+		defaultConfig: {
+			limit: 20,
+			offset: 0,
+      // before: null,
+      // after: null
+		}
+	},
+	blogPosts: {
+		url: ({blogIdentifier, type = ''}) => wrapUrl(`/blog/${blogIdentifier}/posts/${type}`),
+		defaultConfig: {
+			// id: null,
+			// tag: null,
+			limit: 20,
+			offset: 0,
+			reblog_info: false,
+			notes_info: false,
+			// filter: null,
+			// before: null
+		}
+	},
+	blogQueue: {
+		url: ({blogIdentifier}) => wrapUrl(`/blog/${blogIdentifier}/posts/queue`),
+		defaultConfig: {
+			limit: 20,
+			offset: 0,
+			// filter: null
+		}
+	},
+	blogDrafts: {
+		url: ({blogIdentifier}) => wrapUrl(`/blog/${blogIdentifier}/posts/draft`),
+		defaultConfig: {
+			// before_id: null, // number
+			// filter: null, // string
+		}
+	},
+	blogSubmissions: {
+		url: ({blogIdentifier}) => wrapUrl(`/blog/${blogIdentifier}/posts/submission`),
+		defaultConfig: {
+			offset: 0,
+			// filter: null
+		}
+	},
+	blogTag: {
+		url: wrapUrl('/tagged'),
+		defaultConfig: {
+			tag: '',
+			limit: 20,
+			// before: null,
+			// filter: null
 		}
 	}
 }
