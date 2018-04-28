@@ -4,7 +4,7 @@ const Oauth = require('oauth-1.0a');
 const crypto = require('crypto');
 const qs = require('qs');
 const tunnel = require('tunnel');
-const { GET_URL } = require('../config/url');
+const GET_URL = require('../config/get');
 
 type TumblrProps = {
 	consumer_key: string,

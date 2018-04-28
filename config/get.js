@@ -4,7 +4,7 @@ function wrapUrl(api) {
 	return API_BASE_URL + api;
 }
 
-const GET_URL = {
+module.exports {
 	userInfo: {
 		url: wrapUrl('/user/info')
 	},
@@ -95,8 +95,4 @@ const GET_URL = {
 			// filter: null
 		}
 	}
-}
-
-module.exports = {
-  GET_URL
 }
