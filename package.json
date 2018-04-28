@@ -6,8 +6,7 @@
   "scripts": {
 		"test": "mocha test/test.js",
 		"testapi": "node test/api.js",
-    "build": "flow-remove-types src/ -d dist/",
-    "prepublish": "npm run build && npm run test"
+    "build": "flow-remove-types src/ -d dist/"
   },
   "keywords": [
     "tumblr",

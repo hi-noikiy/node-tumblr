@@ -4,7 +4,7 @@ function wrapUrl(api) {
 	return API_BASE_URL + api;
 }
 
-module.exports {
+module.exports = {
 	userInfo: {
 		url: wrapUrl('/user/info')
 	},
