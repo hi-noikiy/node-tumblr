@@ -1,7 +1,7 @@
 {
-  "name": "tumblr.js",
-  "version": "1.0.0",
-  "description": "tumblr api client.",
+  "name": "node-tumlbr",
+  "version": "1.1.0",
+  "description": "use tumblr token access api, can set proxy.",
   "main": "dist/index.js",
   "scripts": {
 		"test": "mocha test/test.js",
@@ -17,16 +17,16 @@
   "author": "zhouyuexie",
   "license": "MIT",
   "dependencies": {
-    "crypto": "^1.0.1",
-    "got": "^8.3.0",
-    "oauth-1.0a": "^2.2.4",
-    "qs": "^6.5.1",
-    "tunnel": "^0.0.5"
+    "crypto": "1.0.1",
+    "got": "8.3.0",
+    "oauth-1.0a": "2.2.4",
+    "qs": "6.5.1",
+    "tunnel": "0.0.5"
   },
   "devDependencies": {
-    "chai": "^4.1.2",
-    "flow-bin": "^0.71.0",
-    "flow-remove-types": "^1.2.3",
-    "mocha": "^5.1.1"
+    "chai": "4.1.2",
+    "flow-bin": "0.71.0",
+    "flow-remove-types": "1.2.3",
+    "mocha": "5.1.1"
   }
 }
