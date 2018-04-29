@@ -1,6 +1,6 @@
 {
-  "name": "node-tumlbr",
-  "version": "1.1.0",
+  "name": "node-tumblr",
+  "version": "1.2.0",
   "description": "use tumblr token access api, can set proxy.",
   "main": "dist/index.js",
   "scripts": {

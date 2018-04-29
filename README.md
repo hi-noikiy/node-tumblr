@@ -1,8 +1,14 @@
-# tumblr.js
+# node-tumblr
 
 use tumblr token access api, can set proxy.
 
 **This repository is still in the test development phase, please do not download it, otherwise the consequences will be conceited.**
+
+## Install
+
+```
+npm install node-tumblr
+```
 
 ## Usage
 
